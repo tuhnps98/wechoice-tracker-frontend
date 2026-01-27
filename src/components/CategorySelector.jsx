@@ -3,17 +3,13 @@ import axios from "axios";
 
 export default function CategorySelector({ onSelect }) {
   const [categories, setCategories] = useState([]);
-  // Lấy link backend từ biến môi trường
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // Gọi API lấy danh sách hạng mục thật từ Backend
     if (apiUrl) {
       axios.get(`${apiUrl}/category`)
         .then(res => {
           setCategories(res.data);
-          // (Tuỳ chọn) Tự động chọn hạng mục đầu tiên nếu muốn
-          // if (res.data && res.data.length > 0) onSelect(res.data[0].id);
         })
         .catch(err => console.error("Lỗi tải danh mục:", err));
     }
