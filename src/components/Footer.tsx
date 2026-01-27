@@ -29,18 +29,18 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* KHỐI 2: Logo Eventista bên phải (MỚI THÊM) */}
+            {/* KHỐI 2: Logo WeChoice bên phải (MỚI THÊM) */}
             <div className="flex items-center justify-start md:justify-end">
                 <a 
-                  href="https://srfashionawards2026.1vote.vn/" 
+                  href="https://wechoice.vn/" 
                   target="_blank" 
                   rel="noreferrer"
                   className="hover:opacity-80 transition-opacity" // Hiệu ứng hover nhẹ
                 >
                   {/* Thay thế src bằng đường dẫn logo của bạn */}
                   <img 
-                    src="/eventista.png" 
-                    alt="Eventista Logo" 
+                    src="/wechoice.png" 
+                    alt="WeChoice Logo" 
                     className="h-8 w-auto object-contain" // h-8 sẽ nhỏ hơn h-10
                   />
                 </a>
