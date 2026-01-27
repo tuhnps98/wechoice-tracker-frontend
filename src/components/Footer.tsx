@@ -14,7 +14,7 @@ export default function Footer() {
 
             {/* KHỐI 1: Text bên trái (Giữ nguyên) */}
             <div className="space-y-3 text-left">
-              <h2 className="text-xl font-extrabold text-gray-900">SR Fashion Awards 2026 Tracker</h2>
+              <h2 className="text-xl font-extrabold text-gray-900">WeChoice Awards 2026 Tracker</h2>
               <p className="text-gray-900 text-sm leading-relaxed font-normal md:whitespace-nowrap">
                 Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2026.
                 <br />
