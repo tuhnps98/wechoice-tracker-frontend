@@ -18,13 +18,39 @@ export default function Header() {
       <div className="w-full px-8 md:px-16 lg:px-24 py-5">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl md:text-3xl font-bold text-white">
-            <Link
+            {/* --- ĐOẠN CODE CŨ --- */}
+{/* <Link
   to="/realtime"
   className="flex items-center gap-3 hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
 >
-  {/* Thêm ảnh logo vào đây */}
-  <img src="/wechoice.png" alt="Logo" className="w-16 h-16 md:w-24 md:h-24 object-contain" />
+  <img src="/wechoice.png" alt="Logo" className="w-10 h-10 md:w-14 md:h-14 object-contain" />
   <span>WeChoice 2025 Tracker</span>
+</Link> */}
+
+{/* --- ĐOẠN CODE MỚI (Thay thế đoạn trên bằng đoạn này) --- */}
+<Link
+  to="/realtime"
+  // 1. Tăng gap-3 lên gap-4 để khoảng cách giữa ảnh và chữ rộng hơn chút vì ảnh to lên
+  className="flex items-center gap-4 hover:opacity-90 transition-opacity duration-200 text-gray-900"
+>
+  {/* 2. LOGO TO LÊN: Tăng kích thước ảnh (ví dụ lên w-20 h-20 và md:w-28 md:h-28) */}
+  <img 
+    src="/wechoice.png" 
+    alt="Logo" 
+    className="w-16 h-16 md:w-24 md:h-24 object-contain" 
+  />
+
+  {/* 3. CHỮ XUỐNG DÒNG: Dùng thẻ div bao ngoài với class "flex flex-col" để xếp chồng lên nhau */}
+  <div className="flex flex-col">
+    {/* Dòng 1: WeChoice (To, đậm, in hoa) */}
+    <span className="font-extrabold text-xl md:text-3xl uppercase leading-none">
+      WeChoice
+    </span>
+    {/* Dòng 2: 2025 Tracker (Nhỏ hơn chút, màu nhạt hơn chút) */}
+    <span className="font-bold text-sm md:text-base text-gray-600 leading-tight">
+      2025 Tracker
+    </span>
+  </div>
 </Link>
           </h1>
 
