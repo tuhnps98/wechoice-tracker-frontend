@@ -41,7 +41,7 @@ export default function Footer() {
                   <img 
                     src="/wechoice.png" 
                     alt="WeChoice Logo" 
-                    className="h-16 md:h-20 w-auto object-contain"
+                    className="h-12 w-auto object-contain"
                   />
                 </a>
             </div>
