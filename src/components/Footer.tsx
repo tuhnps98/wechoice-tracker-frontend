@@ -16,10 +16,10 @@ export default function Footer() {
             <div className="space-y-3 text-left">
               <h2 className="text-xl font-extrabold text-gray-900">SR Fashion Awards 2026 Tracker</h2>
               <p className="text-gray-900 text-sm leading-relaxed font-normal md:whitespace-nowrap">
-                Hệ thống theo dõi và phân tích bình chọn cho giải thưởng SR Fashion Awards 2026.
+                Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2026.
                 <br />
                 <a 
-                  href="https://srfashionawards2026.1vote.vn" 
+                  href="https://wechoice.vn" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="hover:underline hover:text-gray-700 transition-colors"
