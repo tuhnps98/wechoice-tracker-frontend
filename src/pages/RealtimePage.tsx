@@ -21,13 +21,11 @@ export default function RealtimePage() {
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Lấy link backend
   const BE_URL = import.meta.env.VITE_API_URL;
 
   const fetchData = async () => {
     if (!BE_URL) return;
     try {
-      // Gọi API lấy số vote trực tiếp
       const response = await axios.get(`${BE_URL}/realtime`);
       const payload = response.data as ApiResponse;
       
@@ -44,7 +42,6 @@ export default function RealtimePage() {
         ? (payload.data as Candidate[])
         : [];
 
-      // Nhóm ứng viên theo Tên Hạng Mục
       const grouped = payloadData.reduce<Record<string, Candidate[]>>(
         (acc, item) => {
           const key = item.categoryName || "Khác";
@@ -55,7 +52,6 @@ export default function RealtimePage() {
         {}
       );
 
-      // Sắp xếp ứng viên từ cao xuống thấp
       Object.keys(grouped).forEach((category) => {
         grouped[category].sort((a, b) => b.totalVotes - a.totalVotes);
       });
@@ -70,9 +66,7 @@ export default function RealtimePage() {
   };
 
   useEffect(() => {
-    fetchData(); // Gọi ngay khi vào trang
-
-    // Tự động cập nhật mỗi 10 giây
+    fetchData();
     const interval = setInterval(fetchData, 10000); 
     return () => clearInterval(interval);
   }, []);
@@ -84,7 +78,6 @@ export default function RealtimePage() {
           Kết quả bình chọn trực tiếp
         </h1>
         
-        {/* Trạng thái đang tải */}
         {isLoading && !updatedAt && !connectionError && (
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md">
             <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
@@ -92,10 +85,8 @@ export default function RealtimePage() {
           </div>
         )}
 
-        {/* Trạng thái lỗi */}
         {connectionError && <Error message={connectionError} />}
 
-        {/* Trạng thái thành công */}
         {updatedAt && (
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md">
             <span className="w-2 h-2 bg-green-500 rounded-full"></span>
