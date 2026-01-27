@@ -23,7 +23,7 @@ export default function Header() {
   to="/realtime"
   className="flex items-center gap-3 hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
 >
-  <img src="/wechoice.png" alt="Logo" className="w-10 h-10 md:w-14 md:h-14 object-contain" />
+  <img src="/wechoice.png" alt="Logo" className="w-16 h-16 md:w-20 md:h-20 object-contain" />
   <span>WeChoice 2025 Tracker</span>
 </Link> */}
 
@@ -47,8 +47,8 @@ export default function Header() {
       WeChoice
     </span>
     {/* Dòng 2: 2025 Tracker (Nhỏ hơn chút, màu nhạt hơn chút) */}
-    <span className="font-bold text-sm md:text-base text-gray-600 leading-tight">
-      2025 Tracker
+    <span className="font-extrabold text-xl md:text-3xl uppercase leading-none">
+      Awards 2025
     </span>
   </div>
 </Link>
