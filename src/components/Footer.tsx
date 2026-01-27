@@ -16,7 +16,7 @@ export default function Footer() {
             <div className="space-y-3 text-left">
               <h2 className="text-xl font-extrabold text-gray-900">WeChoice Awards 2025 Tracker</h2>
               <p className="text-gray-900 text-sm leading-relaxed font-normal md:whitespace-nowrap">
-                Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2026.
+                Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
                 <br />
                 <a 
                   href="https://wechoice.vn" 
