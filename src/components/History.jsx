@@ -129,7 +129,7 @@ export default function History({ apiPayload }) {
               onChange={(e) => setFilterByRange(Number(e.target.value))}
               className="flex-1 min-w-[150px] px-4 py-2 bg-white border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-gray-300 text-gray-700 font-medium"
             >
-              <option value={0}>10 phút</option>
+              <option value={0}>Tất cả (10 phút)</option>
               <option value={30}>30 phút</option>
               <option value={60}>1 tiếng</option>
               <option value={120}>2 tiếng</option>
@@ -166,7 +166,9 @@ export default function History({ apiPayload }) {
                     <span className="text-xs ml-1">{sortAsc ? "▲" : "▼"}</span>
                   </th>
                   {candidateNames.map((name) => {
-                    const isHighlighted = name.includes("TPB");
+                    const isHighlighted = candidatesData.priority.some(
+                      (p) => p.name === name
+                    );
                     return (
                       <th
                         key={name}
@@ -209,7 +211,9 @@ export default function History({ apiPayload }) {
                           (c) => c.name === cn
                         );
 
-                        const isHighlighted = cn.includes("TPB");
+                        const isHighlighted = candidatesData.priority.some(
+                          (p) => p.name === cn
+                        );
 
                         // Tính voteDiff dựa trên dữ liệu đã lọc
                         let voteDiff = 0;
