@@ -55,7 +55,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             {/* Copyright */}
             <div className="text-sm text-gray-900 space-y-1 text-center md:text-left">
-              <p className="font-bold">Copyright © 2026 Eventista. All rights reserved.</p>
+              <p className="font-bold">Copyright © 2026 Công ty cổ phần VCCORP. All rights reserved.</p>
               <p className="font-normal">
                 Phát triển độc lập bởi người hâm mộ{' '}
                 <a 
