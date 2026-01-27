@@ -27,7 +27,7 @@ export default function Header() {
               <img 
                 src="/wechoice.png" 
                 alt="Logo" 
-                className="w-20 h-20 md:w-28 md:h-28 object-contain" 
+                className="w-25 h-25 md:w-33 md:h-33 object-contain" 
               />
 
               <div className="flex flex-col">
