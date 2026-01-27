@@ -41,7 +41,7 @@ export default function Footer() {
                   <img 
                     src="/wechoice.png" 
                     alt="WeChoice Logo" 
-                    className="h-8 w-auto object-contain" // h-8 sẽ nhỏ hơn h-10
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </a>
             </div>
