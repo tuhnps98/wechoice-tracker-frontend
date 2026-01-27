@@ -23,7 +23,7 @@ export default function Header() {
   className="flex items-center gap-3 hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
 >
   {/* Thêm ảnh logo vào đây */}
-  <img src="/wechoice.png" alt="Logo" className="w-10 h-10 md:w-14 md:h-14 object-contain" />
+  <img src="/wechoice.png" alt="Logo" className="w-16 h-16 md:w-24 md:h-24 object-contain" />
   <span>WeChoice 2025 Tracker</span>
 </Link>
           </h1>
