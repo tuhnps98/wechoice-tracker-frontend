@@ -14,44 +14,34 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-lg w-full border-b border-gray-200">
-      {/* 1. GIẢM PADDING: Chuyển từ py-5 xuống py-2 để header gọn (mỏng) lại giống ảnh 2 */}
-      <div className="w-full px-8 md:px-16 lg:px-24 py-2">
+    // 1. SỬA HEADER: Thay bg-white thành bg-[#8da6bf]
+    <header className="bg-[#8da6bf] shadow-lg w-full border-b border-gray-200">
+      <div className="w-full px-8 md:px-16 lg:px-14 py-5">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl md:text-3xl font-bold text-white">
+          
+          {/* 2. SỬA LOGO: Thay text-gray-900 thành text-white để nổi trên nền xanh */}
+          <h1 className="text-xl md:text-2xl font-bold text-white">
             <Link
               to="/realtime"
-              className="flex items-center gap-4 hover:opacity-90 transition-opacity duration-200 text-gray-900"
+              className="flex items-center gap-3 hover:opacity-90 transition-opacity duration-200 font-bold text-white" 
             >
-              {/* 2. LOGO TO HƠN: Tăng từ w-16/md:w-24 lên w-20/md:w-28 */}
-              <img 
-                src="/wechoice.png" 
-                alt="Logo" 
-                className="w-25 h-25 md:w-33 md:h-33 object-contain" 
-              />
-
-              <div className="flex flex-col">
-                {/* 3. CHỮ MỎNG LẠI: Chuyển từ font-extrabold xuống font-bold */}
-                <span className="font-bold text-xl md:text-3xl uppercase leading-none">
-                  WeChoice
-                </span>
-                <span className="font-bold text-xl md:text-3xl uppercase leading-none">
-                  Awards 2025
-                </span>
-              </div>
+              <img src="/wechoice.png" alt="Logo" className="w-16 h-16 md:w-20 md:h-20 object-contain" />
+              <span>SR Fashion Awards 2026</span>
             </Link>
           </h1>
 
         {/* Desktop Navigation */}
-          <nav className="hidden xl:flex items-center gap-4"> 
+          <nav className="hidden xl:flex items-center gap-2"> 
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
                 className={`px-6 py-2.5 rounded-full font-bold transition-all duration-200 whitespace-nowrap ${
                   location.pathname === link.to
-                    ? 'bg-slate-900 text-white shadow-md'
-                    : 'bg-transparent text-gray-500 hover:bg-gray-500 hover:text-white'
+                    // 3. TRẠNG THÁI ACTIVE: Nền Trắng - Chữ Xanh Đậm (#2c6e8f)
+                    ? 'bg-white text-[#2c6e8f] shadow-md'
+                    // 4. TRẠNG THÁI INACTIVE: Chữ Trắng - Hover nền trắng mờ
+                    : 'bg-transparent text-white hover:bg-white/20'
                 }`}
               >
                 {link.label}
@@ -100,7 +90,7 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
                 className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-center ${
                   location.pathname === link.to
-                    ? "bg-gray-900 text-white shadow-lg"
+                    ? "bg-[#8da6bf] text-white shadow-lg"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
