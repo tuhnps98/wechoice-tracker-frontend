@@ -26,7 +26,7 @@ export default function Header() {
               className="flex items-center gap-3 hover:opacity-90 transition-opacity duration-200 font-bold text-white" 
             >
               <img src="/wechoice.png" alt="Logo" className="w-16 h-16 md:w-20 md:h-20 object-contain" />
-              <span>SR Fashion Awards 2026</span>
+              <span>WeChoice Awards 2025</span>
             </Link>
           </h1>
 
