@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useRef, useEffect } from "react";
+import candidatesData from "../info/candidates.json";
 import Error from "../components/Error";
+import finalResult from "../info/final_result.json";
 
 interface Candidate {
   id: number;
@@ -18,17 +19,15 @@ interface ApiResponse {
 export default function RealtimePage() {
   const [data, setData] = useState<Record<string, Candidate[]>>({});
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
+
+  const prevVotesRef = useRef<Record<number, number>>({});
+
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const BE_URL = import.meta.env.VITE_API_URL;
-
-  const fetchData = async () => {
-    if (!BE_URL) return;
+  useEffect(() => {
     try {
-      const response = await axios.get(`${BE_URL}/realtime`);
-      const payload = response.data as ApiResponse;
-      
+      const payload = finalResult as ApiResponse;
       setConnectionError(null);
 
       if (!payload || !payload.data) {
@@ -41,6 +40,13 @@ export default function RealtimePage() {
       const payloadData = Array.isArray(payload.data)
         ? (payload.data as Candidate[])
         : [];
+
+      const diff: Record<number, number> = {};
+      payloadData.forEach((item) => {
+        const previousVoteCount = prevVotesRef.current[item.id] ?? 0;
+        diff[item.id] = item.totalVotes - previousVoteCount;
+        prevVotesRef.current[item.id] = item.totalVotes;
+      });
 
       const grouped = payloadData.reduce<Record<string, Candidate[]>>(
         (acc, item) => {
@@ -59,50 +65,48 @@ export default function RealtimePage() {
       setData(grouped);
       setIsLoading(false);
     } catch (error) {
-      console.error("Lỗi tải dữ liệu realtime:", error);
-      setConnectionError("Không thể kết nối đến server. Đang thử lại...");
+      console.error("Error loading final results:", error);
+      setConnectionError("Không thể đọc dữ liệu kết quả cuối cùng.");
       setIsLoading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchData();
-    const interval = setInterval(fetchData, 10000); 
-    return () => clearInterval(interval);
+    // run once on mount
   }, []);
 
   return (
     <div className="px-4 xl:px-8 py-10 max-w-[98%] mx-auto">
       <div className="mb-10 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 pb-2">
-          Kết quả bình chọn trực tiếp
+          Kết quả bình chọn chung cuộc
         </h1>
-        
-        {isLoading && !updatedAt && !connectionError && (
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md">
+        {isLoading && !updatedAt && !connectionError ? (
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md flex-wrap justify-center">
             <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-            <span className="text-gray-600">Đang tải dữ liệu từ WeChoice...</span>
+            <span className="text-gray-600">Đang tải dữ liệu...</span>
           </div>
-        )}
-
-        {connectionError && <Error message={connectionError} />}
-
-        {updatedAt && (
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md">
-            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-            <span className="text-gray-700 text-sm md:text-base">
-              Cập nhật lần cuối:{" "}
-              <span className="font-semibold text-gray-900">
-                {updatedAt.toLocaleString("vi-VN")}
+        ) : connectionError ? (
+          <Error message={connectionError} />
+        ) : updatedAt ? (
+          <>
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md flex-wrap justify-center">
+              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+              <span className="text-gray-700 text-sm md:text-base">
+                Cập nhật lần cuối lúc:{" "}
+                <span className="font-semibold text-gray-900">
+                  {new Date(updatedAt).toLocaleString("vi-VN")}
+                </span>
               </span>
-            </span>
-          </div>
-        )}
+            </div>
+          </>
+        ) : null}
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 w-full max-w-7xl mx-auto">
-        {Object.entries(data).map(([category, candidates]) => (
-          <div key={category} className="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 w-full max-w-7xl mx-auto w-full">
+        {Object.entries(data).map(([category, candidates], idx) => (
+          <div
+            key={category}
+            className="bg-white rounded-2xl shadow-lg transition-all duration-300 overflow-hidden"
+            style={{ animationDelay: `${idx * 100}ms` }}
+          >
             <div className="bg-gray-900 p-5">
               <h2 className="text-xl font-bold text-white text-center">
                 {category}
@@ -112,30 +116,56 @@ export default function RealtimePage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-100">
-                    <th className="p-3 text-left font-semibold text-gray-700 w-2/3">Ứng viên</th>
-                    <th className="p-3 text-center font-semibold text-gray-700">Tổng bình chọn</th>
+                    <th className="p-3 text-left font-semibold text-gray-700 w-2/3">
+                      Ứng viên
+                    </th>
+                    <th className="p-3 text-center font-semibold text-gray-700">
+                      Tổng bình chọn
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {candidates.map((c, index) => (
-                    <tr key={c.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="p-3">
-                        <div className="flex items-center gap-2">
-                          {index < 3 && (
-                            <span className="text-sm font-bold text-amber-700">
-                              #{index + 1}
+                  {candidates.map((c, index) => {
+                    const isHighlighted = candidatesData.priority.some(
+                      (p) => p.name === c.name
+                    );
+                    return (
+                      <tr
+                        key={c.id}
+                        className={`transition-colors duration-200 ${
+                          isHighlighted
+                            ? "bg-red-50 hover:bg-red-100"
+                            : "hover:bg-gray-50"
+                        }`}
+                      >
+                        <td className="p-3">
+                          <div className="flex items-center gap-2">
+                            {index < 3 && (
+                              <span className="text-sm font-bold text-amber-700">
+                                #{index + 1}
+                              </span>
+                            )}
+                            <span
+                              className={`font-medium break-words ${
+                                isHighlighted
+                                  ? "text-rose-700 font-semibold"
+                                  : "text-gray-800"
+                              }`}
+                            >
+                              {c.name || "Không rõ"}
                             </span>
-                          )}
-                          <span className="font-medium text-gray-800">
-                            {c.name}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="p-3 text-center font-semibold text-gray-900">
-                        {c.totalVotes.toLocaleString()}
-                      </td>
-                    </tr>
-                  ))}
+                          </div>
+                        </td>
+                        <td
+                          className={`p-3 text-center font-semibold whitespace-nowrap ${
+                            isHighlighted ? "text-rose-700" : "text-gray-900"
+                          }`}
+                        >
+                          {c.totalVotes.toLocaleString()}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
