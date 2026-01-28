@@ -19,7 +19,7 @@ export default function Footer() {
                 Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
                 <br />
                 <a 
-                  href="https://srfashionawards2026.1vote.vn" 
+                  href="https://wechoice.vn" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="hover:underline hover:text-gray-700 transition-colors"
@@ -40,7 +40,7 @@ export default function Footer() {
                   {/* Thay thế src bằng đường dẫn logo của bạn */}
                   <img 
                     src="/wechoice.png" 
-                    alt="Eventista Logo" 
+                    alt="WeChoice Logo" 
                     className="h-8 w-auto object-contain" // h-8 sẽ nhỏ hơn h-10
                   />
                 </a>
