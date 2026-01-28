@@ -19,7 +19,7 @@ export default function Footer() {
                 Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
                 <br />
                 <a 
-                  href="https://wechoice.vn" 
+                  href="https://srfashionawards2026.1vote.vn" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="hover:underline hover:text-gray-700 transition-colors"
@@ -29,19 +29,19 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* KHỐI 2: Logo WeChoice bên phải (MỚI THÊM) */}
+            {/* KHỐI 2: Logo Eventista bên phải (MỚI THÊM) */}
             <div className="flex items-center justify-start md:justify-end">
                 <a 
-                  href="https://wechoice.vn/" 
+                  href="https://srfashionawards2026.1vote.vn/" 
                   target="_blank" 
                   rel="noreferrer"
                   className="hover:opacity-80 transition-opacity" // Hiệu ứng hover nhẹ
                 >
                   {/* Thay thế src bằng đường dẫn logo của bạn */}
                   <img 
-                    src="/wechoice.png" 
-                    alt="WeChoice Logo" 
-                    className="h-12 w-auto object-contain"
+                    src="/eventista.png" 
+                    alt="Eventista Logo" 
+                    className="h-8 w-auto object-contain" // h-8 sẽ nhỏ hơn h-10
                   />
                 </a>
             </div>
@@ -83,4 +83,3 @@ export default function Footer() {
     </footer>
   );
 }
-
